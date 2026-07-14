@@ -177,25 +177,6 @@ export default function CoupleSection() {
 
       {/* Wedding Hashtag */}
       <div className="wedding-hashtag-wrapper reveal">
-        {/* Name breakdown visual */}
-        <div className="hashtag-breakdown" aria-hidden="true">
-          <span className="name-breakdown">
-            <span className="name-part name-part--highlight">Mah</span>
-            <span className="name-part name-part--dim">mudah</span>
-          </span>
-          <span className="name-breakdown-arrow">→</span>
-          <span className="name-breakdown">
-            <span className="name-part name-part--key">#Mudah</span>
-            <span className="name-part name-part--mid">Bersama</span>
-            <span className="name-part name-part--key">Zaky</span>
-          </span>
-          <span className="name-breakdown-arrow">←</span>
-          <span className="name-breakdown">
-            <span className="name-part name-part--dim">Za</span>
-            <span className="name-part name-part--highlight">ky</span>
-          </span>
-        </div>
-
         <p className="hashtag-label">Abadikan momen bahagia kami 📸</p>
         <button
           id="copy-hashtag-btn"
