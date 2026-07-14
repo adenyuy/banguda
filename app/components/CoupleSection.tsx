@@ -32,7 +32,7 @@ export default function CoupleSection() {
   const nextId = useRef(0);
 
   const handleCopyHashtag = useCallback(() => {
-    navigator.clipboard.writeText('#MahmudahKanBersamaZaky').then(() => {
+    navigator.clipboard.writeText('#MudahBersamaZaky').then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -177,7 +177,26 @@ export default function CoupleSection() {
 
       {/* Wedding Hashtag */}
       <div className="wedding-hashtag-wrapper reveal">
-        <p className="hashtag-label">Abadikan momen bahagia kami dengan</p>
+        {/* Name breakdown visual */}
+        <div className="hashtag-breakdown" aria-hidden="true">
+          <span className="name-breakdown">
+            <span className="name-part name-part--highlight">Mah</span>
+            <span className="name-part name-part--dim">mudah</span>
+          </span>
+          <span className="name-breakdown-arrow">→</span>
+          <span className="name-breakdown">
+            <span className="name-part name-part--key">#Mudah</span>
+            <span className="name-part name-part--mid">Bersama</span>
+            <span className="name-part name-part--key">Zaky</span>
+          </span>
+          <span className="name-breakdown-arrow">←</span>
+          <span className="name-breakdown">
+            <span className="name-part name-part--dim">Za</span>
+            <span className="name-part name-part--highlight">ky</span>
+          </span>
+        </div>
+
+        <p className="hashtag-label">Abadikan momen bahagia kami 📸</p>
         <button
           id="copy-hashtag-btn"
           className={`wedding-hashtag ${copied ? 'hashtag-copied' : ''}`}
@@ -185,7 +204,7 @@ export default function CoupleSection() {
           aria-label="Salin hashtag pernikahan"
           title="Klik untuk menyalin"
         >
-          <span className="hashtag-text">#MahmudahKanBersamaZaky</span>
+          <span className="hashtag-text">#MudahBersamaZaky</span>
           <span className="hashtag-copy-icon" aria-hidden="true">
             {copied ? '✅' : '📋'}
           </span>

@@ -44,7 +44,7 @@ export default function FooterSection() {
       </div>
 
       <p className="footer-hashtag" aria-label="Wedding hashtag">
-        #MahmudahKanBersamaZaky
+        #MudahBersamaZaky
       </p>
 
       <p className="footer-branding reveal">
