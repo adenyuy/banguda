@@ -1686,6 +1686,133 @@ button {
   text-transform: uppercase;
 }
 
+/* Footer hashtag */
+.footer-hashtag {
+  font-family: var(--font-script);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: var(--color-gold-light);
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+  letter-spacing: 0.02em;
+  animation: shimmerText 3s ease-in-out infinite;
+}
+
+/* =============================================
+   WEDDING HASHTAG COMPONENT
+   ============================================= */
+
+.wedding-hashtag-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hashtag-label {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--color-text-mid);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+.wedding-hashtag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.8rem;
+  background: linear-gradient(135deg, var(--color-ivory-dark), var(--color-ivory));
+  border: 2px solid var(--color-gold);
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(201, 169, 110, 0.2);
+}
+
+.wedding-hashtag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 169, 110, 0.25),
+    transparent
+  );
+  animation: shimmerSlide 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmerSlide {
+  0%   { left: -100%; }
+  50%  { left: 100%; }
+  100% { left: 100%; }
+}
+
+.hashtag-text {
+  font-family: var(--font-script);
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  color: var(--color-brown-mid);
+  line-height: 1;
+  background: linear-gradient(135deg, var(--color-brown-dark), var(--color-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hashtag-copy-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.wedding-hashtag:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(201, 169, 110, 0.4);
+  border-color: var(--color-gold);
+}
+
+.wedding-hashtag:hover .hashtag-copy-icon {
+  transform: rotate(15deg) scale(1.2);
+}
+
+.wedding-hashtag:active {
+  transform: scale(0.97);
+}
+
+.hashtag-copied {
+  background: linear-gradient(135deg, #f0faf0, #e8f5e9) !important;
+  border-color: #4caf50 !important;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3) !important;
+  animation: copiedPop 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes copiedPop {
+  0%  { transform: scale(1); }
+  40% { transform: scale(1.08); }
+  70% { transform: scale(0.96); }
+  100%{ transform: scale(1); }
+}
+
+.hashtag-hint {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-mid);
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+  min-height: 1.2em;
+}
+
+@keyframes shimmerText {
+  0%, 100% { opacity: 0.85; }
+  50%       { opacity: 1; text-shadow: 0 0 20px rgba(201, 169, 110, 0.5); }
+}
+
 /* =============================================
    AUDIO PLAYER (floating)
    ============================================= */

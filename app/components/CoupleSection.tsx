@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 const HEARTS = ['💕', '❤️', '💖', '💗', '💓', '✨', '🌸', '💐'];
 
@@ -28,7 +28,15 @@ export default function CoupleSection() {
   const [hoveredCard, setHoveredCard] = useState<'bride' | 'groom' | null>(null);
   const [heartsVisible, setHeartsVisible] = useState(false);
   const [floatingHearts, setFloatingHearts] = useState<{ id: number; emoji: string; x: number; delay: number }[]>([]);
+  const [copied, setCopied] = useState(false);
   const nextId = useRef(0);
+
+  const handleCopyHashtag = useCallback(() => {
+    navigator.clipboard.writeText('#MahmudahKanBersamaZaky').then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, []);
 
   // Intersection observer for reveal
   useEffect(() => {
@@ -165,6 +173,24 @@ export default function CoupleSection() {
       {/* Bottom tagline */}
       <div className="couple-tagline reveal" aria-hidden="true">
         <span>💍</span> Dipersatukan dalam Cinta &amp; Doa <span>💍</span>
+      </div>
+
+      {/* Wedding Hashtag */}
+      <div className="wedding-hashtag-wrapper reveal">
+        <p className="hashtag-label">Abadikan momen bahagia kami dengan</p>
+        <button
+          id="copy-hashtag-btn"
+          className={`wedding-hashtag ${copied ? 'hashtag-copied' : ''}`}
+          onClick={handleCopyHashtag}
+          aria-label="Salin hashtag pernikahan"
+          title="Klik untuk menyalin"
+        >
+          <span className="hashtag-text">#MahmudahKanBersamaZaky</span>
+          <span className="hashtag-copy-icon" aria-hidden="true">
+            {copied ? '✅' : '📋'}
+          </span>
+        </button>
+        <p className="hashtag-hint">{copied ? 'Tersalin! ✨' : 'Klik untuk menyalin'}</p>
       </div>
     </section>
   );

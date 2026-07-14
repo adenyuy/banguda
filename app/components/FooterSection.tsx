@@ -43,6 +43,10 @@ export default function FooterSection() {
         <span>✦</span>
       </div>
 
+      <p className="footer-hashtag" aria-label="Wedding hashtag">
+        #MahmudahKanBersamaZaky
+      </p>
+
       <p className="footer-branding reveal">
         Made with ❤️ for Mahmudah &amp; Zaky • 04 April 2030
       </p>
