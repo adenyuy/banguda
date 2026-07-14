@@ -13,21 +13,21 @@ interface Wish {
 const DEFAULT_WISHES: Wish[] = [
   {
     id: 'default-1',
-    name: 'Bunda Aisyah',
+    name: 'Bunga dan Isal',
     message: 'Alhamdulillah, selamat Mahmudah & mas Zaky ❤️ Semoga menjadi keluarga yang sakinah, mawaddah & warrahmah.. Aamiin....',
     attendance: 'hadir',
     timestamp: Date.now() - 3600000,
   },
   {
     id: 'default-2',
-    name: 'Dewiii',
+    name: 'Rifka Adzanti dan Keluarga',
     message: 'Lancar sampai hari H, so happy for you Mahmudah dan pasangan 💕',
     attendance: 'hadir',
     timestamp: Date.now() - 7200000,
   },
   {
     id: 'default-3',
-    name: 'Rini & Keluarga',
+    name: 'Alyssa Maulidina',
     message: 'Selamat menempuh hidup baru ya Mahmudah & Zaky! Semoga langgeng sampai kakek nenek 🥰',
     attendance: 'hadir',
     timestamp: Date.now() - 10800000,
