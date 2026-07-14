@@ -850,8 +850,183 @@ button {
 }
 
 /* =============================================
+   COUPLE SECTION — EXTRA ANIMATIONS
+   ============================================= */
+
+/* Second spinning ring (counter-spin, offset) */
+.couple-photo-ring--2 {
+  inset: -14px;
+  border-style: dashed;
+  opacity: 0.25;
+  animation: spin 30s linear infinite reverse;
+}
+
+/* Jiggle on hover */
+@keyframes jiggle {
+  0%   { transform: rotate(0deg) scale(1); }
+  15%  { transform: rotate(-4deg) scale(1.04); }
+  30%  { transform: rotate(4deg) scale(1.06); }
+  45%  { transform: rotate(-3deg) scale(1.04); }
+  60%  { transform: rotate(3deg) scale(1.05); }
+  75%  { transform: rotate(-2deg) scale(1.03); }
+  90%  { transform: rotate(1deg) scale(1.01); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+.frame-jiggle {
+  animation: jiggle 0.6s ease both;
+}
+
+/* Crown / hat emoji floating above photo */
+.photo-crown {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.6rem;
+  z-index: 10;
+  animation: crownFloat 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+@keyframes crownFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(-5deg); }
+  50%       { transform: translateX(-50%) translateY(-6px) rotate(5deg); }
+}
+
+/* Bounce name script */
+@keyframes nameBounce {
+  0%, 100% { transform: translateY(0); }
+  20%      { transform: translateY(-8px); }
+  40%      { transform: translateY(-4px); }
+  60%      { transform: translateY(-7px); }
+  80%      { transform: translateY(-2px); }
+}
+.couple-name-bounce {
+  animation: nameBounce 3.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Emoji row */
+.couple-emoji-row {
+  font-size: 1.3rem;
+  letter-spacing: 0.3rem;
+  animation: emojiPulse 2s ease-in-out infinite;
+}
+@keyframes emojiPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+/* Separator animated */
+.couple-separator--animated .separator-ampersand {
+  display: block;
+  animation: ampBeat 1.4s ease-in-out infinite;
+}
+@keyframes ampBeat {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  30%       { transform: scale(1.25) rotate(-10deg); }
+  60%       { transform: scale(1.1) rotate(8deg); }
+}
+.separator-hearts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 1.1rem;
+  margin-top: 0.4rem;
+  animation: heartSpin 4s linear infinite;
+}
+@keyframes heartSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Sparkle burst */
+.sparkle-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.sparkle-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(calc(var(--i) * 45deg)) translateY(0px);
+  transition: opacity 0.2s;
+}
+.sparkle-active .sparkle-dot {
+  animation: sparkleShoot 0.6s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.05s);
+}
+@keyframes sparkleShoot {
+  0%   { opacity: 1; transform: translate(-50%, -50%) rotate(calc(var(--i) * 45deg)) translateY(0px); }
+  80%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(calc(var(--i) * 45deg)) translateY(-80px); }
+}
+
+/* Floating hearts container */
+.hearts-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.floating-heart {
+  position: absolute;
+  bottom: 0;
+  font-size: 1.2rem;
+  animation: heartFloat 4s ease-in forwards;
+  opacity: 0;
+}
+@keyframes heartFloat {
+  0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { transform: translateY(-45vh) scale(1) rotate(20deg); opacity: 0.8; }
+  100% { transform: translateY(-90vh) scale(0.6) rotate(-20deg); opacity: 0; }
+}
+
+/* Couple section relative for hearts */
+.couple-section {
+  position: relative;
+}
+
+/* Tagline bottom */
+.couple-tagline {
+  margin-top: 2.5rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-brown-mid);
+  letter-spacing: 0.08em;
+  animation: fadeInUp 1s ease both 0.5s;
+}
+
+/* Bride card entrance from left */
+.couple-card--bride.visible {
+  animation: slideInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px) rotate(-3deg); }
+  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+}
+
+/* Groom card entrance from right */
+.couple-card--groom.visible {
+  animation: slideInRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) both 0.2s;
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px) rotate(3deg); }
+  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+}
+
+/* =============================================
    SAVE THE DATE SECTION
    ============================================= */
+
 .save-date-section {
   padding: 0;
   background: var(--color-ivory-dark);

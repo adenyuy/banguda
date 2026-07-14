@@ -2,9 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-// Public domain / royalty-free wedding music
-const AUDIO_URL =
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+// Local backsound file
+const AUDIO_URL = '/asset/backsound.mpeg';
 
 interface AudioPlayerProps {
   autoPlay?: boolean;
