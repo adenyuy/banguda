@@ -1,65 +1,109 @@
-import Image from "next/image";
+'use client';
 
+import { useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
+
+import Cover from './components/Cover';
+import QuoteSection from './components/QuoteSection';
+import CoupleSection from './components/CoupleSection';
+import SaveTheDateSection from './components/SaveTheDateSection';
+import GallerySection from './components/GallerySection';
+import WishesSection from './components/WishesSection';
+import FooterSection from './components/FooterSection';
+import AudioPlayer from './components/AudioPlayer';
+
+// Inner component that reads searchParams
+function WeddingApp() {
+  const searchParams = useSearchParams();
+  const guestName = searchParams.get('to') ?? '';
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [audioAutoPlay, setAudioAutoPlay] = useState(false);
+
+  function handleOpen() {
+    setIsOpen(true);
+    setAudioAutoPlay(true);
+  }
+
+  return (
+    <div className="page-wrapper">
+      {/* Cover overlay — hidden after open */}
+      {!isOpen && (
+        <Cover guestName={guestName} onOpen={handleOpen} />
+      )}
+
+      {/* Main invitation content */}
+      {isOpen && (
+        <div className="invitation-layout">
+          {/* LEFT: sticky panel (desktop only) */}
+          <aside className="invitation-left-panel" aria-hidden="true">
+            <div className="left-panel-bg">
+              <Image
+                src="/asset/foto1.jpeg"
+                alt=""
+                fill
+                className="left-panel-bg-image"
+                priority
+                sizes="420px"
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+              />
+              <div className="left-panel-overlay" />
+            </div>
+
+            {/* Corner decorations */}
+            <div className="left-panel-corner left-panel-corner--tl" />
+            <div className="left-panel-corner left-panel-corner--tr" />
+            <div className="left-panel-corner left-panel-corner--bl" />
+            <div className="left-panel-corner left-panel-corner--br" />
+
+            <div className="left-panel-content">
+              <span className="left-panel-the-wedding">The Wedding Of</span>
+              <div className="left-panel-divider" />
+              <h1 className="left-panel-names">
+                Mahmudah<br />&amp; Zaky
+              </h1>
+              <p className="left-panel-date">Jumat, 04 April 2030</p>
+            </div>
+          </aside>
+
+          {/* RIGHT: scrollable content */}
+          <main className="invitation-right-panel" id="main-content">
+            <QuoteSection />
+            <CoupleSection />
+            <SaveTheDateSection />
+            <GallerySection />
+            <WishesSection />
+            <FooterSection />
+          </main>
+        </div>
+      )}
+
+      {/* Floating audio player — always visible after open */}
+      {isOpen && <AudioPlayer autoPlay={audioAutoPlay} />}
+    </div>
+  );
+}
+
+// Wrap in Suspense because useSearchParams needs it in Next.js
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <Suspense fallback={
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        background: '#5c3d20',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#c9a96e',
+        fontFamily: 'Georgia, serif',
+        fontSize: '1.5rem',
+      }}>
+        Memuat undangan...
+      </div>
+    }>
+      <WeddingApp />
+    </Suspense>
   );
 }
